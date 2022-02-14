@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+
+{%block title%}
+ Корпоративная сеть
+{%endblock%}
+
+{%block main%}
+<div class = 'container-fluid'>
+    <h1 class = "text-center mb-3">Информация по КИИ</h1>
+    <div class = 'row'>
+        <div class = 'col-lg-6'>
+            <div class="card col-lg-10 mb-3 border-primary">
+                <div class="card-body">
+                    <h4 class="card-title">Список информационных систем {{ infa[0].okii }} </h4>
+                    <div class = "list-group col-lg-10">
+                        {% for x in infa%}
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">{{x.naim_pass}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = 'col-lg-6'>
+            <div class="card col-lg-10 mb-3 border-primary">
+                <div class="card-body">
+                    <div class = "list-group col-lg-10">
+                        <a href="{{ url_for('asutp.dowland', okii = infa[0].okii, name = 'Акт категорирования') }}" class="list-group-item list-group-item-action list-group-item-primary">Акт категорирования</a>
+                        <a href="{{ url_for('asutp.dowland', okii = infa[0].okii, name = 'План реагирования на компьютерные инциденты') }}" class="list-group-item list-group-item-action list-group-item-primary">План реагирования на компьютерные инциденты</a>
+                        <a href="#" class="list-group-item list-group-item-action list-group-item-primary">План аварийного восстановления</a>
+                        <a href="{{ url_for('asutp.dowland', okii = infa[0].okii, name = 'Сведения') }}" class="list-group-item list-group-item-action list-group-item-primary">Сведения о результатах присвоения ОКИИ одной из категорий значимости</a>
+                        <a href="{{ url_for('asutp.dowland', okii = infa[0].okii, name = 'Модель нарушителя') }}" class="list-group-item list-group-item-action list-group-item-primary">Модель нарушителя</a>
+                        <a href="{{ url_for('asutp.dowland', okii = infa[0].okii, name = 'Модель угроз') }}" class="list-group-item list-group-item-action list-group-item-primary">Модель угроз</a>
+                        <a href="{{ url_for('asutp.dowland', okii = infa[0].okii, name = 'оценка показателей') }}" class="list-group-item list-group-item-action list-group-item-primary">оценка показателей</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
