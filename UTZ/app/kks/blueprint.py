@@ -5,7 +5,6 @@ from .forms import PostForm, IsForm
 import ipaddress
 from app import db
 from itertools import groupby
-from test_pd import test, invit_ipy
 
 
 kks = Blueprint('kks', __name__, template_folder='templates')
@@ -90,10 +89,6 @@ def ploshadka_detail(plosh_detail, fil):
     infos = kkss.query.filter(kkss.ploshadka == str(plosh_detail), kkss.ip == kkss.broadcast, kkss.filial == str(fil)).all()
     ips = kkss.query.filter(kkss.ploshadka == str(plosh_detail)).all()
     ipy = kkss.query.filter(kkss.ploshadka == str(plosh_detail), kkss.filial == str(fil)) # все ip с площадки например Черну АУП
-    spisok_ipy = []
-    for ip in ipy:
-        spisok_ipy.append(ip.ip) # формируем список ИП адресов площадки
-    invit_ipy(spisok_ipy) # передаем список ip площадки для инвинтаризации
     return render_template('kks/ploshadka_detail.html', infos = infos, ips = ips)
 
 
@@ -123,16 +118,6 @@ def ip_detail(ip_detail):
 @login_required
 def is_det(is_det):
     isss = iss.query.filter(iss.id == is_det).first()
-    ipy = isss.ip_is.all() # ищем все ИП связные ИС и ККС
-    ################################################
-    spisok_ip = []
-    for ip in ipy:
-        spisok_ip.append(ip.ip)
-    # надо сделать список уязвимого ПО передать в шаблон
-    metrik = mertik.query.filter(mertik.ip == str(ipy[0].ip)).all() # берем все уязвимости для данного ip  
-    # ///////////////////////////////////////////////////////
-    test1 = test(spisok_ip) # передаем уязвимости 
-    # ////////////////////////////////////////////////
     q2 = request.args.get('q2')
     if q2:
         x = kkss.query.filter(kkss.ip.contains(q2)).first() # добавить alert если ip нет в списке ККС
@@ -147,7 +132,7 @@ def is_det(is_det):
         return redirect(url_for('kks.is_det', is_det = isss.id))
     else:
         form = IsForm(obj = isss)
-        return render_template('kks/is_det.html', form = form, isss = isss, ipy = ipy, test1 = test1)   
+        return render_template('kks/is_det.html', form = form, isss = isss, ipy = ipy)   
 
 
 

@@ -14,13 +14,6 @@ kkss_iss = db.Table('kkss_iss',
         db.Column('kkss_id', db.Integer(), db.ForeignKey('kkss.id')),
         db.Column('iss_id', db.Integer(), db.ForeignKey('iss.id'))
     )
-#new table
-#invint_ip = db.Table('invint_ip',
- #       db.Column('ip', db.String()),
-  #      db.Column('data', db.String()),
-   #     db.Column('fqdn', db.String()),
-    #    db.Column('netbios', db.String())
-    #)
 
 class kkss(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -60,29 +53,7 @@ class iss(db.Model):
     def __init__(self, *args, **kwargs):
         super(iss, self).__init__(*args, **kwargs)
 
-# класс метрика для построения графиков
-class mertik(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    ip = db.Column(db.String())
-    netbioss = db.Column(db.String())
-    naimen = db.Column(db.String()) # наименование уязвимости
-    pyt = db.Column(db.Text) # путь уязвимого файла
-    uroven = db.Column(db.String()) # уровень уязвимости по шкале
-    tip = db.Column(db.Text) # тип уязвимости
-    cve = db.Column(db.String()) # cve
-    kopisan = db.Column(db.Text) # краткое описание
-    opisan = db.Column(db.Text) # полное описание
-    ustran = db.Column(db.Text) # устранение
-    link = db.Column(db.String()) # ссылки
-    cvss = db.Column(db.String())
-    vektor_cvss = db.Column(db.String())
-    cvss3 = db.Column(db.String())
-    vektor_cvss3 = db.Column(db.String())
-    id_id = db.Column(db.String())
-
-    def __init__(self, *args, **kwargs):
-        super(mertik, self).__init__(*args, **kwargs)
-        
+  
 
 # авторизация flask_security
 roles_users = db.Table('roles_users',
@@ -102,18 +73,6 @@ class Role(db.Model, RoleMixin):
     name = db.Column(db.String(32), unique = True)
     description = db.Column(db.String(255))
 
-
-class ip_invit(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    ip = db.Column(db.String())
-    host_time = db.Column(db.String())
-    fqdn = db.Column(db.String()) 
-    netbios = db.Column(db.String()) 
-    ping = db.Column(db.String()) 
-    
-    def __init__(self, *args, **kwargs):
-        super(ip_invit, self).__init__(*args, **kwargs)
-
     
 class events(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -125,20 +84,7 @@ class events(db.Model):
         super(events, self).__init__(*args, **kwargs)
 
 
-        
-# паспорт ОКИИ
-class kii(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    naim_pass = db.Column(db.String()) # наименование системы по паспорту
-    naim_far = db.Column(db.String()) # наименование по формуляру
-    cod = db.Column(db.String()) # код в ПИКТС 
-    data = db.Column(db.String()) # дата ввода
-    vender = db.Column(db.String()) # изготовитель
-    okii = db.Column(db.String()) # объект кии
     
-    
-    def __init__(self, *args, **kwargs):
-        super(kii, self).__init__(*args, **kwargs)
 
 
 
